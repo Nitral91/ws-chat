@@ -1,7 +1,9 @@
-const express = require('express');
-const cors = require('cors');
+const mongoose = require('mongoose');
+const keys = require('./config/keys');
+const app = require('./app');
 
-const app = express();
+const connectURL = keys.mongoURI;
+
 const http = require('http').createServer(app);
 
 const SERVER_PORT = 3000;
@@ -11,10 +13,6 @@ const io = require('socket.io')(http, {
       origin: '*'
    }
 })
-
-app.get('/', (req, res) => {
-   res.send('Hello world');
-});
 
 let userList = new Map();
 
@@ -55,6 +53,10 @@ function removeUser(userName, id) {
       }
    }
 }
+
+mongoose.connect(connectURL)
+    .then(() => console.log('MongoDB connected'))
+    .catch(error => console.log(error));
 
 http.listen(SERVER_PORT, () => {
    console.log('Server is running on port:', SERVER_PORT);
