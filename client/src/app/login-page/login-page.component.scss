@@ -1,0 +1,17 @@
+.login-block {
+  display: inline-block;
+  width: 400px;
+
+  &__title {
+    text-align: center;
+  }
+
+  &__fields {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__actions {
+    text-align: center;
+  }
+}

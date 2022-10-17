@@ -1,0 +1,23 @@
+<div class="auth">
+  <mat-toolbar class="navigation">
+    <div class="navigation__logo">
+      <a routerLink="/" class="navigation__logo-link">
+        WS-chat
+      </a>
+    </div>
+    <ul class="navigation__actions">
+      <li routerLinkActive="active" class="navigation__action">
+        <a routerLink="/login" class="navigation__link sign-in">Sign In</a>
+      </li>
+      <li routerLinkActive="active" class="navigation__action">
+        <a routerLink="/register" class="navigation__link sign-up">Sign Up</a>
+      </li>
+    </ul>
+  </mat-toolbar>
+
+  <div class="auth-block">
+    <router-outlet></router-outlet>
+  </div>
+
+  <footer></footer>
+</div>
