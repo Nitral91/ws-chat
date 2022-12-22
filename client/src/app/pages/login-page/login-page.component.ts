@@ -1,16 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../shared/services/auth/auth.service";
+import {AuthService} from "../../shared/services/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {Subject, takeUntil} from "rxjs";
 
 @Component({
-  selector: 'app-registration-page',
-  templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.scss']
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss']
 })
-export class RegistrationPageComponent implements OnInit, OnDestroy {
+export class LoginPageComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
 
@@ -18,17 +18,15 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
+    private _snackBar: MatSnackBar,
     private router: Router,
-    private _snackBar: MatSnackBar
-  ) { }
+    private route: ActivatedRoute
+  ) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup<any>(
       {
-        login: new FormControl(
-          null,
-          [Validators.required, Validators.minLength(5)]
-        ),
         email: new FormControl(
           null,
           [Validators.email, Validators.required]
@@ -39,6 +37,18 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
         )
       }
     );
+
+    this.route.queryParams
+      .pipe(
+        takeUntil(this.destroy$)
+      )
+      .subscribe((params: Params) => {
+      if (params['registered']) {
+        // you can enter
+      } else if (params['accessDenied']) {
+        this._snackBar.open('Authorisation is needed to proceed', 'Close');
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -48,21 +58,18 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     this.form.disable();
-    this.auth.registration(this.form.value)
+
+    this.auth.login(this.form.value)
       .pipe(
         takeUntil(this.destroy$)
       )
-      .subscribe(res => {
-        this.router.navigate(['/login'], {
-          queryParams: {
-            registered: true
-          }
-        });
-          this._snackBar.open('Successfully registered', 'Close');
-      },
+      .subscribe(() => {
+          this._snackBar.open('Logged In', 'Close');
+          this.router.navigate(['/lobby']);
+        },
         error => {
           this._snackBar.open(error.error.message, 'Close');
-        });
+          this.form.enable();
+        })
   }
-
 }

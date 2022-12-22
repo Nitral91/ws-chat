@@ -15,12 +15,13 @@ export class AuthService {
   ) {
   }
 
-  login(user: User): Observable<{token: string}> {
-    return this.http.post<{token: string}>('http://localhost:3000/api/auth/login', user)
+  login(user: User): Observable<{token: string, login: string}> {
+    return this.http.post<{token: string, login: string}>('http://localhost:3000/api/auth/login', user)
       .pipe(
         tap(
-          ({token}) => {
+          ({token, login}) => {
             localStorage.setItem('auth-token', token);
+            localStorage.setItem('login', login);
             this.setToken(token)
           }
         )
@@ -40,10 +41,11 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return !!this.token;
+    return !!this.token && !!localStorage.getItem('auth-token');
   }
 
   logout() {
     this.setToken(null);
+    localStorage.removeItem('auth-token');
   }
 }

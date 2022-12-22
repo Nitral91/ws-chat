@@ -1,0 +1,12 @@
+<h3 mat-dialog-title>Create Room</h3>
+
+<mat-form-field appearance="standard">
+  <mat-label>Room Name</mat-label>
+  <input matInput type="text" [(ngModel)]="roomTitle">
+</mat-form-field>
+
+<div mat-dialog-actions>
+  <button [mat-dialog-close]="roomTitle">Create</button>
+  <button (click)="onNoClose()">Cancel</button>
+</div>
+

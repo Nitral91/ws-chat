@@ -1,0 +1,20 @@
+<div class="lobby">
+  <div class="container">
+    <h2>Lobby page</h2>
+    <div class="lobby__actions">
+      <button (click)="onCreateRoom()">
+        Create Room
+      </button>
+    </div>
+    <div class="lobby-rooms">
+      <mat-list>
+        <mat-list-item role="listitem" *ngFor="let room of rooms">
+          <div class="room">
+            <span class="room__title">{{ room.title }}</span>
+            <button mat-raised-button color="primary" [routerLink]="['/room', room.id]">Join Channel</button>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+</div>

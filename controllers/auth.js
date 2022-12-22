@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+
 const keys = require('../config/keys');
 const User = require('../models/User');
 
@@ -24,7 +25,8 @@ module.exports.login = async (req, res) => {
             );
 
             res.status(200).json({
-                token: `Bearer ${token}`
+                token: `Bearer ${token}`,
+                login: candidate.login
             })
         } else {
             res.status(401).json({

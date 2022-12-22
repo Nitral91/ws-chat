@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const keys = require('./config/keys');
 const app = require('./app');
+const {saveMessage} = require("./controllers/messages");
+const {getRoomById} = require("./controllers/rooms");
+const {getUserById, getUserByLogin} = require("./controllers/users");
 
 const connectURL = keys.mongoURI;
 
@@ -14,44 +17,80 @@ const io = require('socket.io')(http, {
    }
 })
 
-let userList = new Map();
+let channelList = new Map();
 
 io.on('connection', (socket) => {
-   let userName = socket.handshake.query.userName;
+   const CHANNEL_ID = socket.handshake.query.channelId;
+   const USER_LOGIN = socket.handshake.query.userLogin;
 
-   addUser(userName, socket.id);
+   addChannel(CHANNEL_ID, USER_LOGIN);
 
-   socket.broadcast.emit('user-list', [...userList.keys()]); // Emitting an action to all connected clients
-   socket.emit('user-list', [...userList.keys()]); // Emitting an action only to current connection
+   socket.on('join', (channelId) => {
+      socket.join(channelId);
 
-   socket.on('message', (msg) => {
-      socket.broadcast.emit('message-broadcast', {
-         message: msg,
-         userName
-      })
+      socket.emit('user-list', getUsersFromChannel(CHANNEL_ID));
+   });
+
+   socket.on('leave', (channelId) => {
+      socket.to(channelId).emit('user-list', removeUser(channelId, USER_LOGIN));
    })
 
-   socket.on('disconnect', (reason) => {
-      removeUser(userName, socket.id);
+   socket.on('disconnect', () => {
+      socket.emit('user-delete', removeUser(CHANNEL_ID, USER_LOGIN));
    });
+
+   socket.on('user-list', (channelId) => {
+      socket.to(channelId).emit('user-list', getUsersFromChannel(channelId));
+   })
+
+   socket.on('message', async ({message, channelId}) => {
+      const room = await getRoomById(channelId);
+      const author = await getUserByLogin(message.userName);
+
+      console.log('room: ', room);
+      console.log('author: ', author);
+
+      if (room && author) {
+         const newMessage = {
+            message: message.message,
+            room: room._id,
+            author: author._id
+         }
+
+         try {
+            await saveMessage(newMessage);
+
+            socket.to(channelId).emit('message-broadcast', {
+               message: message.message,
+               userName: USER_LOGIN
+            })
+         } catch (e) {
+            socket.to(channelId).emit('error', {
+               message: 'Something went wrong. Message was not sent'
+            })
+         }
+      }
+   });
+
+
 
 });
 
-function addUser(userName, id) {
-  if (!userList.has(userName)) {
-     userList.set(userName, new Set(id));
-  } else {
-     userList.get(userName).add(id);
-  }
+function addChannel(channelId, userName) {
+   if (!channelList.has(channelId)) {
+      channelList.set(channelId, new Set([userName]));
+   } else {
+      channelList.get(channelId).add(userName);
+   }
 }
 
-function removeUser(userName, id) {
-   if (userList.has(userName)) {
-      let userIds = userList.get(userName);
-      if (!userIds.size) {
-         userList.delete(userName);
-      }
-   }
+function getUsersFromChannel(channelId) {
+   return Array.from(channelList.get(channelId));
+}
+
+function removeUser(channelId, userName) {
+   channelList.get(channelId).delete(userName);
+   return Array.from(channelList.get(channelId));
 }
 
 mongoose.connect(connectURL)
