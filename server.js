@@ -47,14 +47,11 @@ io.on('connection', (socket) => {
       const room = await getRoomById(channelId);
       const author = await getUserByLogin(message.userName);
 
-      console.log('room: ', room);
-      console.log('author: ', author);
-
       if (room && author) {
          const newMessage = {
             message: message.message,
             room: room._id,
-            author: author._id
+            author: author
          }
 
          try {
