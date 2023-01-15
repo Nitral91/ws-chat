@@ -8,12 +8,7 @@
     <mat-card-content class="login-block__fields">
       <mat-form-field appearance="fill">
         <mat-label>Email: </mat-label>
-        <input
-          matInput
-          formControlName="email"
-          id="email"
-          type="email"
-        >
+        <input matInput formControlName="email" id="email" type="email" />
         <mat-error *ngIf="form.get('email').errors?.['required']">
           Email is required
         </mat-error>
@@ -28,12 +23,14 @@
           formControlName="password"
           id="password"
           type="password"
-        >
+        />
         <mat-error *ngIf="form.get('password').errors?.['required']">
           Password is required
         </mat-error>
         <mat-error *ngIf="form.get('password').errors?.['minlength']">
-          Password should be at least of {{ form.get('password').errors?.['minlength']['requiredLength'] }} characters
+          Password should be at least of
+          {{ form.get('password').errors?.['minlength']['requiredLength'] }}
+          characters
         </mat-error>
       </mat-form-field>
     </mat-card-content>
@@ -46,7 +43,6 @@
       >
         Sign In
       </button>
-
     </mat-card-actions>
   </form>
 </mat-card>

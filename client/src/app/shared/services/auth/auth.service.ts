@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
-import {User} from "../../interfaces/user.interface";
-import {HttpClient} from "@angular/common/http";
-import {Observable, tap} from "rxjs";
+import { User } from '../../interfaces/user.interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable, tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private token: string | null;
 
-  constructor(
-    private http: HttpClient
-  ) {
-  }
+  constructor(private http: HttpClient) {}
 
-  login(user: User): Observable<{token: string, login: string}> {
-    return this.http.post<{token: string, login: string}>('http://localhost:3000/api/auth/login', user)
-      .pipe(
-        tap(
-          ({token, login}) => {
-            localStorage.setItem('auth-token', token);
-            localStorage.setItem('login', login);
-            this.setToken(token)
-          }
-        )
+  login(user: User): Observable<{ token: string; login: string }> {
+    return this.http
+      .post<{ token: string; login: string }>(
+        'http://localhost:3000/api/auth/login',
+        user
       )
+      .pipe(
+        tap(({ token, login }) => {
+          localStorage.setItem('auth-token', token);
+          localStorage.setItem('login', login);
+          this.setToken(token);
+        })
+      );
   }
 
   registration(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:3000/api/auth/register', user);
+    return this.http.post<User>(
+      'http://localhost:3000/api/auth/register',
+      user
+    );
   }
 
   setToken(token: string | null): void {

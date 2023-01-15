@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginPageComponent} from "./pages/login-page/login-page.component";
-import {AuthLayoutComponent} from "./shared/layouts/auth-layout/auth-layout.component";
-import {MainLayoutComponent} from "./shared/layouts/main-layout/main-layout.component";
-import {RegistrationPageComponent} from "./pages/registration-page/registration-page.component";
-import {AuthGuard} from "./shared/models/auth.guard";
-import {ChatComponent} from "./pages/chat/chat.component";
-import {LobbyComponent} from "./pages/lobby/lobby.component";
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
+import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
+import { AuthGuard } from './shared/models/auth.guard';
+import { ChatComponent } from './pages/chat/chat.component';
+import { LobbyComponent } from './pages/lobby/lobby.component';
 
 const routes: Routes = [
   {
@@ -16,17 +16,17 @@ const routes: Routes = [
       {
         path: '',
         redirectTo: '/login',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
         path: 'login',
-        component: LoginPageComponent
+        component: LoginPageComponent,
       },
       {
         path: 'register',
-        component: RegistrationPageComponent
-      }
-    ]
+        component: RegistrationPageComponent,
+      },
+    ],
   },
   {
     path: '',
@@ -36,18 +36,18 @@ const routes: Routes = [
     children: [
       {
         path: 'lobby',
-        component: LobbyComponent
+        component: LobbyComponent,
       },
       {
         path: 'room/:id',
-        component: ChatComponent
-      }
-    ]
-  }
+        component: ChatComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

@@ -8,11 +8,12 @@
       </div>
     </div>
     <div class="message__list">
-      <div class="chatbox__messages"
-           *ngFor="let msg of messageList"
-           [ngClass]="{
-              mine: msg.myMessage
-           }"
+      <div
+        class="chatbox__messages"
+        *ngFor="let msg of messageList"
+        [ngClass]="{
+          mine: msg.myMessage
+        }"
       >
         <div class="user-message">
           <div class="message-box">
@@ -28,6 +29,6 @@
     </div>
   </div>
 
-  <input type="text" [(ngModel)]="message">
+  <input type="text" [(ngModel)]="message" />
   <button (click)="sendMessage()">Send</button>
 </div>

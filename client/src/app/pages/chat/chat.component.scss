@@ -8,7 +8,7 @@
 
   h1 {
     margin: 0.5em auto;
-    color: #FFF;
+    color: #fff;
     text-align: center;
   }
 }
@@ -27,7 +27,6 @@
   }
 
   &__messages {
-
     &.mine .message-box {
       float: right;
     }
@@ -48,13 +47,13 @@
     overflow: auto;
 
     & > .name {
-      color: #FFF;
+      color: #fff;
       font-size: 1em;
       margin-bottom: 0.2em;
     }
 
     & > .message {
-      color: #FFF;
+      color: #fff;
       font-size: 0.7em;
       margin: 0 2.8em;
     }
@@ -96,7 +95,7 @@
     margin: -0.25em 2em;
     font-size: 0.7em;
     font-weight: 300;
-    color: #FFF;
+    color: #fff;
     width: 200px;
   }
 
