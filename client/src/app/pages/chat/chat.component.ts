@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { io, Socket } from 'socket.io-client';
-import { ActivatedRoute, Params } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { mergeMap, Subject, takeUntil } from 'rxjs';
-import { MessagesService } from '../../shared/services/messages/messages.service';
-import { MessageInterface } from '../../shared/interfaces/message.interface';
+import type { OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { Socket } from 'socket.io-client';
+import { io } from 'socket.io-client';
+import type { ActivatedRoute, Params } from '@angular/router';
+import type { MatSnackBar } from '@angular/material/snack-bar';
+import { Subject, takeUntil } from 'rxjs';
+import type { MessagesService } from '../../shared/services/messages/messages.service';
+import type { MessageInterface } from '../../shared/interfaces/message.interface';
 
 @Component({
   selector: 'app-chat',

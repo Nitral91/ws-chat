@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { RoomsService } from '../../shared/services/rooms/rooms.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
+import type { OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import type { RoomsService } from '../../shared/services/rooms/rooms.service';
+import type { MatSnackBar } from '@angular/material/snack-bar';
+import type { MatDialog } from '@angular/material/dialog';
 import { NewRoomModalComponent } from '../../components/new-room-modal/new-room-modal.component';
-import { Room } from '../../shared/interfaces/room.interface';
+import type { Room } from '../../shared/interfaces/room.interface';
 import { Subject, takeUntil } from 'rxjs';
-import { Router } from '@angular/router';
+import type { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lobby',

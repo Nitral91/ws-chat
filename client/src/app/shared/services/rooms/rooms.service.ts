@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Room } from '../../interfaces/room.interface';
+import type { HttpClient } from '@angular/common/http';
+import type { Observable } from 'rxjs';
+import type { Room } from '../../interfaces/room.interface';
 
 @Injectable({
   providedIn: 'root',
