@@ -46,7 +46,7 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
       .registration(this.form.value)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        (res) => {
+        res => {
           this.router.navigate(['/login'], {
             queryParams: {
               registered: true,
@@ -54,7 +54,7 @@ export class RegistrationPageComponent implements OnInit, OnDestroy {
           });
           this._snackBar.open('Successfully registered', 'Close');
         },
-        (error) => {
+        error => {
           this._snackBar.open(error.error.message, 'Close');
         }
       );

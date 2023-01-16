@@ -3,8 +3,7 @@
   <form
     [formGroup]="form"
     (ngSubmit)="onSubmit()"
-    class="card register-block__form"
-  >
+    class="card register-block__form">
     <mat-card-content class="register-block__fields">
       <mat-form-field appearance="fill">
         <mat-label>Login: </mat-label>
@@ -29,8 +28,7 @@
           matInput
           formControlName="password"
           id="password"
-          type="password"
-        />
+          type="password" />
         <mat-error *ngIf="form.get('password').errors?.['required']">
           Password is required
         </mat-error>
@@ -46,8 +44,7 @@
         mat-raised-button
         color="primary"
         type="submit"
-        [disabled]="form.invalid || form.disabled"
-      >
+        [disabled]="form.invalid || form.disabled">
         Sign In
       </button>
     </mat-card-actions>

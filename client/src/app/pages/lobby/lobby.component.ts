@@ -36,7 +36,7 @@ export class LobbyComponent implements OnInit, OnDestroy {
     this.roomsService
       .getRooms()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res) => {
+      .subscribe(res => {
         this.rooms = res;
       });
   }
@@ -47,20 +47,20 @@ export class LobbyComponent implements OnInit, OnDestroy {
     dialog
       .afterClosed()
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res) => {
+      .subscribe(res => {
         if (!res.cancelled) {
           this.roomsService
             .createRoom(res)
             .pipe(takeUntil(this.destroy$))
             .subscribe(
-              (res) => {
+              res => {
                 this._snackBar.open(
                   `Room ${res.title} has been created`,
                   'Close'
                 );
                 this.fetchAllRooms();
               },
-              (error) => {
+              error => {
                 this._snackBar.open(error.error.message, 'Close');
               }
             );

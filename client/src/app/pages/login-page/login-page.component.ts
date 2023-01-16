@@ -58,7 +58,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
           this._snackBar.open('Logged In', 'Close');
           this.router.navigate(['/lobby']);
         },
-        (error) => {
+        error => {
           this._snackBar.open(error.error.message, 'Close');
           this.form.enable();
         }

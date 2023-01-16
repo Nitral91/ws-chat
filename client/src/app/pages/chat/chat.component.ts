@@ -13,7 +13,7 @@ import { MessageInterface } from '../../shared/interfaces/message.interface';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   userLogin: string;
-  message: string = '';
+  message = '';
   channelId: string;
   messageList: MessageInterface[] = [];
   userList: string[];
@@ -37,8 +37,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.messagesService
       .getMessagesForRoom(this.channelId)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((res) => {
-        this.messageList = res.map((message) => {
+      .subscribe(res => {
+        this.messageList = res.map(message => {
           return {
             message: message.message,
             userName: message.userName,
@@ -53,7 +53,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     );
     this.socket.emit('join', this.channelId);
 
-    this.socket.on('user-list', (userList) => {
+    this.socket.on('user-list', userList => {
       this.userList = userList;
     });
 
@@ -73,7 +73,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.socket.on('error', (res) => {
+    this.socket.on('error', res => {
       this._snackBar.open(res.message, 'Close');
     });
   }

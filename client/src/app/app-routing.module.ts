@@ -1,12 +1,13 @@
+import { AuthGuard } from './shared/models/auth.guard';
+import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
+import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { LobbyComponent } from './pages/lobby/lobby.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
-import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from './shared/layouts/main-layout/main-layout.component';
 import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
-import { AuthGuard } from './shared/models/auth.guard';
-import { ChatComponent } from './pages/chat/chat.component';
-import { LobbyComponent } from './pages/lobby/lobby.component';
 
 const routes: Routes = [
   {
