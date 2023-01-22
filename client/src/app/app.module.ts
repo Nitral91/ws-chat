@@ -22,6 +22,7 @@ import { LobbyComponent } from './pages/lobby/lobby.component';
 import { NewRoomModalComponent } from './components/new-room-modal/new-room-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { DropdownComponent } from './shared/components/dropdown/dropdown.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatListModule } from '@angular/material/list';
     RegistrationPageComponent,
     LobbyComponent,
     NewRoomModalComponent,
+    DropdownComponent,
   ],
   imports: [
     BrowserModule,

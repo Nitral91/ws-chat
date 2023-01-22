@@ -5,6 +5,12 @@
   <input matInput type="text" [(ngModel)]="roomTitle" />
 </mat-form-field>
 
+<app-dropdown
+  class="custom-dropdown"
+  title="Room Type"
+  [options]="dropdownOptions"
+  (currentValueChange)="onDropdownChange($event)"></app-dropdown>
+
 <div mat-dialog-actions>
   <button [mat-dialog-close]="roomTitle">Create</button>
   <button (click)="onNoClose()">Cancel</button>

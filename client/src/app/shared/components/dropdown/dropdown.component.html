@@ -1,0 +1,22 @@
+<div class="dropdown">
+  <button
+    type="button"
+    class="dropdown__button"
+    [ngClass]="{
+      open: dropdownOpen
+    }"
+    (click)="toggleDropdown()">
+    <span id="dropdown__label">{{ title }}:</span>
+    <span class="dropdown__value">{{ currentValue.name }}</span>
+  </button>
+  <ul class="dropdown__list" [ngClass]="{ open: dropdownOpen }">
+    <li
+      *ngFor="let option of options"
+      class="dropdown__item"
+      [ngClass]="{ selected: currentValue === option }"
+      tabindex="0"
+      (click)="select(option)"
+      role="option"
+      [innerHTML]="option.name"></li>
+  </ul>
+</div>

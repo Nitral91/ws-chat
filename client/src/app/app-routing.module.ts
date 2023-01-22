@@ -2,7 +2,7 @@ import { AuthGuard } from './shared/models/auth.guard';
 import { AuthLayoutComponent } from './shared/layouts/auth-layout/auth-layout.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
-import type { Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 import { RouterModule } from '@angular/router';
 
 import { LobbyComponent } from './pages/lobby/lobby.component';

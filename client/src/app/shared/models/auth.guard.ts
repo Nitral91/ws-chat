@@ -1,14 +1,14 @@
-import type {
+import {
   ActivatedRouteSnapshot,
   CanActivate,
   CanActivateChild,
   Router,
   RouterStateSnapshot,
 } from '@angular/router';
-import type { Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { Injectable } from '@angular/core';
-import type { AuthService } from '../services/auth/auth.service';
+import { AuthService } from '../services/auth/auth.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,9 @@
-import type { OnDestroy, OnInit } from '@angular/core';
+import { OnDestroy, OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import type { AuthService } from '../../shared/services/auth/auth.service';
-import type { MatSnackBar } from '@angular/material/snack-bar';
-import type { Router } from '@angular/router';
+import { AuthService } from '../../shared/services/auth/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

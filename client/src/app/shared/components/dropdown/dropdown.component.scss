@@ -1,0 +1,81 @@
+$accent-color: cornflowerblue;
+$text-color: #444;
+$font-size: 0.85em;
+$border-color: #ddd;
+
+.dropdown {
+  width: 100%;
+  position: relative;
+  margin-right: 8px;
+
+  &__button {
+    border: none;
+    border-top: 1px solid $border-color;
+    position: relative;
+    justify-content: space-between;
+    padding: .75em 32px .75em .75em;
+    background-color: rgba(0,0,0,.04);
+    display: flex;
+    font-size: $font-size;
+    width: 100%;
+    color: $text-color;
+    cursor: pointer;
+    align-items: center;
+
+    &::before {
+      content: '';
+      position: absolute;
+      background-image: url("/assets/svg/chevron-down.svg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      top: 50%;
+      right: 4px;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+    }
+
+    &.open {
+      &::before {
+        transform: translateY(-50%) rotate(180deg);
+      }
+    }
+  }
+
+  &__value {
+    font-weight: 600;
+  }
+
+  &__list {
+    display: none;
+    background: #fff;
+    list-style: none;
+    border: 1px solid $accent-color;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    z-index: 10;
+    right: 0;
+    margin: 0;
+    transform: translateY(100%);
+
+    &.open {
+      display: block;
+    }
+  }
+
+  &__item {
+    padding: 4px 16px;
+    cursor: pointer;
+    font-weight: 700;
+
+    &.selected {
+      background: darken(rgba(0,0,0,.04), 5%);
+    }
+
+    &:hover {
+      background: fade_out($accent-color, 0.6);
+    }
+  }
+}
